@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using WTFMessageAPI.Data;
+
 namespace WTFMessageAPI
 {
     public class Program
@@ -6,8 +9,11 @@ namespace WTFMessageAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("ApplicationDBContextConnection") ?? throw new InvalidOperationException("Connectionstring ApplicationDBContextConnection not found");
 
-            // Add services to the container.
+            // Add services to the container
+
+            builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
