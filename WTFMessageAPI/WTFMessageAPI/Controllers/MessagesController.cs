@@ -25,5 +25,13 @@ namespace WTFMessageAPI.Controllers
 
             return messages;
         }
+
+        [HttpGet("{id}")]
+        public async Task<Models.Message> GetOneProduct(int id)
+        {
+            var message = await _messageManager.GetOneMessage(id);
+
+            return message;
+        }
     }
 }

@@ -13,12 +13,6 @@ namespace WTFMessageAPI.DAL
             _context = context;
         }
 
-        public async Task<List<Message>> GetDBMessages()
-        {
-            var messages = await _context.Messages.ToListAsync();
-
-            return messages;
-        }
 
         public async Task<List<Message>> GetAllMessages()
         {
@@ -30,6 +24,33 @@ namespace WTFMessageAPI.DAL
             }
 
             return Messages;
+        }
+
+        public async Task<Models.Message> GetOneMessage(int id)
+        {
+            if (Messages == null || !Messages.Any())
+            {
+                Messages = await GetDBMessages();
+            }
+
+            var existingMessage = Messages.Where(p => p.Id == id).SingleOrDefault();
+
+            if (existingMessage != null)
+            {
+                return existingMessage;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        //Hämtar från databasen
+        public async Task<List<Message>> GetDBMessages()
+        {
+            var messages = await _context.Messages.ToListAsync();
+
+            return messages;
         }
     }
 }
