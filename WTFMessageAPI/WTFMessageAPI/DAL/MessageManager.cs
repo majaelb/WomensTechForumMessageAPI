@@ -17,8 +17,6 @@ namespace WTFMessageAPI.DAL
 
         public async Task<List<Message>> GetAllMessages()
         {
-            //var messageData = new MessageData();
-
             if(Messages == null || !Messages.Any())
             {
                 Messages = await GetDBMessages();
@@ -47,11 +45,22 @@ namespace WTFMessageAPI.DAL
         }
         //TODO:
         //Create
+        public async Task CreateMessage(Message message) //Används av httpPost i controller
+        {
+            if (Messages == null || !Messages.Any())
+            {
+                await GetAllMessages();
+            }
+
+            //Messages.Add(message);
+            _context.Messages.Add(message); //spara inlägget
+            await _context.SaveChangesAsync();
+        }
 
         //Update
 
         //Delete from DB
-        public async Task DeleteProduct(int id)
+        public async Task DeleteMessage(int id)
         {
             Models.Message message = await _context.Messages.FindAsync(id);
 

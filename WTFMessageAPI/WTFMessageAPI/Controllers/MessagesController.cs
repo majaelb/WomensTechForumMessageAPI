@@ -27,11 +27,18 @@ namespace WTFMessageAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Models.Message> GetOneProduct(int id)
+        public async Task<Message> GetOneMessage(int id)
         {
             var message = await _messageManager.GetOneMessage(id);
 
             return message;
+        }
+
+
+        [HttpPost]
+        public async Task PostMessage([FromBody] Message message) //Skapa ny (Create)
+        {
+            await _messageManager.CreateMessage(message);
         }
 
         [HttpPut("{id}")]
