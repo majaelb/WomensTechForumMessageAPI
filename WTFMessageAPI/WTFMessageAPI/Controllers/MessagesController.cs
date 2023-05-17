@@ -33,5 +33,11 @@ namespace WTFMessageAPI.Controllers
 
             return message;
         }
+
+        [HttpDelete("{id}")]
+        public async Task DeleteProduct(int id)
+        {
+            await _messageManager.DeleteProduct(id);
+        }
     }
 }

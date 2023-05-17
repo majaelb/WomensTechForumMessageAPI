@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using WTFMessageAPI.Data;
 using WTFMessageAPI.Models;
 
@@ -44,8 +45,24 @@ namespace WTFMessageAPI.DAL
                 return null;
             }
         }
+        //TODO:
+        //Create
 
-        //Hämtar från databasen
+        //Update
+
+        //Delete from DB
+        public async Task DeleteProduct(int id)
+        {
+            Models.Message message = await _context.Messages.FindAsync(id);
+
+            if (message != null)
+            {
+                _context.Messages.Remove(message); //ta bort inlägget
+                await _context.SaveChangesAsync(); //Spara
+            }
+        }
+
+        //Get messages from DB
         public async Task<List<Message>> GetDBMessages()
         {
             var messages = await _context.Messages.ToListAsync();
