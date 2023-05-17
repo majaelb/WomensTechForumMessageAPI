@@ -12,12 +12,6 @@ namespace WTFMessageAPI.DAL
         {
             _context = context;
         }
-
-        public MessageData()
-        {
-            
-        }
-
         public async Task<List<Message>> GetMessages()
         {
             var messages = await _context.Messages.ToListAsync();

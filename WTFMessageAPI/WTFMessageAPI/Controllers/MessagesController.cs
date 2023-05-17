@@ -9,14 +9,21 @@ namespace WTFMessageAPI.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
+        private readonly MessageManager _messageManager;
+        public MessagesController(MessageManager messageManager)
+        {
+
+            _messageManager = messageManager;
+
+        }
+
         [HttpGet]
         public async Task<IEnumerable<Message>> GetMessages()
         {
-            var messagemanagaer = new MessageManager();
 
-            var messages = DAL.MessageManager.GetAllMessages();
+            var messages = await _messageManager.GetAllMessages();
 
-            return await messages;
+            return messages;
         }
     }
 }

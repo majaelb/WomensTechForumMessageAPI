@@ -5,11 +5,10 @@ namespace WTFMessageAPI.Data
 {
     public class ApplicationDBContext : DbContext
     {
-        public DbSet<Message> Messages { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=MessageAPI;Trusted_Connection=True; Encrypt=false");
         }
+
+        public DbSet<Message> Messages { get; set; }
     }
 }
