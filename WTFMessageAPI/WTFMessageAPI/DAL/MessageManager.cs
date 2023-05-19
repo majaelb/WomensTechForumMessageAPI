@@ -52,7 +52,7 @@ namespace WTFMessageAPI.DAL
                 await GetAllMessages();
             }
 
-            //Messages.Add(message);
+            message.DateTime = DateTime.Now;
             _context.Messages.Add(message); //spara inlägget
             await _context.SaveChangesAsync();
         }
