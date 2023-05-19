@@ -58,6 +58,31 @@ namespace WTFMessageAPI.DAL
         }
 
         //Update
+        public async Task UpdateMessage(Message message, int id)
+        {
+            if (Messages == null || !Messages.Any())
+            {
+                await GetAllMessages();
+            }
+
+            var existingMessage = Messages.FirstOrDefault(m => m.Id == id);
+
+            if (existingMessage != null)
+            {
+                existingMessage.Title = message.Title;
+                existingMessage.TextMessage = message.TextMessage;
+                existingMessage.DateTime = message.DateTime;
+                existingMessage.SenderId = message.SenderId;
+                existingMessage.ReceiverId = message.ReceiverId;
+                existingMessage.IsRead = true;
+
+                await _context.SaveChangesAsync();
+
+            }
+        }
+
+
+
 
         //Delete from DB
         public async Task DeleteMessage(int id)

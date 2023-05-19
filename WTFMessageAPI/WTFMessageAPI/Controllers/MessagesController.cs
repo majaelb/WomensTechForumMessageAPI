@@ -42,6 +42,10 @@ namespace WTFMessageAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        public async Task PutMessage(int id, [FromBody] Message message) //Uppdatera (Update)
+        {
+            await _messageManager.UpdateMessage(message, id);
+        }
 
         [HttpDelete("{id}")]
         public async Task DeleteMessage(int id)
