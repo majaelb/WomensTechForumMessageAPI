@@ -11,7 +11,7 @@ namespace WTFMessageAPI
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("ApplicationDBContextConnection") ?? throw new InvalidOperationException("Connectionstring ApplicationDBContextConnection not found");
-            builder.Services.AddScoped<MessageManager>();
+            builder.Services.AddTransient<MessageManager>();
             // Add services to the container
 
             builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));

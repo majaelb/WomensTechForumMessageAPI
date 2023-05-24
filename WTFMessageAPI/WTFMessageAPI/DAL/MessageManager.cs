@@ -81,9 +81,6 @@ namespace WTFMessageAPI.DAL
             }
         }
 
-
-
-
         //Delete from DB
         public async Task DeleteMessage(int id)
         {
